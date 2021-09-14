@@ -1,0 +1,17 @@
+﻿Build started...
+1>------ Build started: Project: WindowPong, Configuration: Debug Win32 ------
+1>Main.cpp
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Ball.h(45,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Ball.h(51,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Paddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Paddle.h(21,28): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Paddle.h(22,28): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Paddle.h(24,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Paddle.h(25,34): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Main.cpp(22,54): warning C4091: 'typedef ': ignored on left of 'WinMain::PADDLE' when no variable is declared
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Main.cpp(38,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Main.cpp(39,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+1>C:\Users\joels\source\repos\WindowPong\WindowPong\Main.cpp(42,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+1>WindowPong.vcxproj -> C:\Users\joels\source\repos\WindowPong\Debug\WindowPong.exe
+1>Done building project "WindowPong.vcxproj".
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
