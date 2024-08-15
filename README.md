@@ -1,5 +1,5 @@
 # WindowPong
-####A new take on the classic game of Pong where each sprite is an application window
+#### A new take on the classic game of Pong where each sprite is an application window
 
 Window Pong is a personal exploration into using the WindowsAPI for non conventional applications such as moving windows automatically or in response to user input that is more complex than simply dragging and dropping. Perhaps the ability to have more control over the function of an application window is useful for providing a smoother user experience. For example, if a window pops up and the user's mouse is right where it needs to be to click. Since this application uses the WindowsAPI, it only works on Windows.
 
