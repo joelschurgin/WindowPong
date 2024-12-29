@@ -2,7 +2,6 @@
 
 void Ball::update()
 {
-	
 	// update speed
 	if (waitingToLaunch) // exit if the ball is waiting to launch
 		return;
@@ -19,9 +18,15 @@ void Ball::update()
 
 		// someone gets a point
 		if (x < 0)
+		{
 			pointWon = RIGHT_POINT;
+			pointScored = true;
+		}
 		else
+		{
 			pointWon = LEFT_POINT;
+			pointScored = true;
+		}
 	}
 
 	// reverse y speed
@@ -40,6 +45,18 @@ void Ball::updateWindow()
 int Ball::isAPointWon()
 {
 	return pointWon;
+}
+
+int Ball::shouldIncrementScore()
+{
+	if (pointScored) 
+	{
+		pointScored = false;
+		
+		if (pointWon == LEFT_POINT) return ScoreCard::LEFT_PADDLE;
+		else if (pointWon == RIGHT_POINT) return ScoreCard::RIGHT_PADDLE;
+	}
+	return -1;
 }
 
 void Ball::randomizeAngle()

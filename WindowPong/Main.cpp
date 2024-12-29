@@ -18,16 +18,24 @@ int CALLBACK WinMain(
     typedef enum PADDLE { RIGHT_PADDLE, LEFT_PADDLE }; // boolean used to idenify each paddle
 
     // initialize windows
+    ScoreCard scoreCard;
+    scoreCard.init(hInstance, nCmdShow, WndProc, T("Score"));
+    scoreCard.setBackgroundColor(61, 56, 51);
+    scoreCard.setFullscreen();
+
     Paddle leftPaddle;
     leftPaddle.init(hInstance, nCmdShow, WndProc, T("Left Paddle"));
+    leftPaddle.setBackgroundColor(52, 223, 235);
     leftPaddle.updateWindowRect();
 
     Paddle rightPaddle;
     rightPaddle.init(hInstance, nCmdShow, WndProc, T("Right Paddle"));
+    rightPaddle.setBackgroundColor(174, 52, 235);
     rightPaddle.updateWindowRect();
 
     Ball ball;
     ball.init(hInstance, nCmdShow, WndProc, T("Ball"));
+    ball.setBackgroundColor(235, 64, 52);
     ball.updateWindowRect();
 
     // set the window positions
@@ -41,12 +49,14 @@ int CALLBACK WinMain(
     rightPaddle.setPosition(rightPaddleX, rightPaddleY, RIGHT_PADDLE);
 
     ball.setPosition(-100.0, leftPaddleY); // start ball on the left side
+    
+    scoreCard.reset();
 
     // Main message loop:
     MSG msg;
-    bool running = true;
+    WindowPong::running = true;
 
-    while (running)
+    while (WindowPong::running)
     {
         SetFocus(ball.getHWND());
 
@@ -65,7 +75,7 @@ int CALLBACK WinMain(
                 switch (msg.wParam)
                 {
                 case 'Q':
-                    running = false;
+                    WindowPong::running = false;
                     break;
                 // left paddle input
                 case 'W':
@@ -134,28 +144,27 @@ int CALLBACK WinMain(
             rightPaddle.getY(),
             rightPaddle.getXSize(),
             rightPaddle.getYSize(), false);
+        
 
-        //if (leftCollision || rightCollision)
-        //{
-        //    leftPaddle.incrementSensitivity();
-        //    rightPaddle.incrementSensitivity();
-        //}
+        const int shouldIncrementScore = ball.shouldIncrementScore();
+        scoreCard.countPoint(shouldIncrementScore);
+
+        if (ball.isAPointWon() != Ball::NO_POINTS)
+        {
+            if (ball.isAPointWon() != Ball::LEFT_POINT)
+            {
+                ball.waitToLaunch(LEFT_PADDLE, leftPaddleX, leftPaddle.getMidPointY());
+            }
+            else
+            {
+                ball.waitToLaunch(RIGHT_PADDLE, rightPaddleX, rightPaddle.getMidPointY());
+            }
+        }
 
         leftPaddle.update();
         rightPaddle.update();
         ball.update();
-
-        // check if a point has been one
-        if (ball.isAPointWon() != Ball::NO_POINTS)
-        {
-            if (ball.isAPointWon() != Ball::LEFT_POINT)
-                ball.waitToLaunch(LEFT_PADDLE, leftPaddleX, leftPaddle.getMidPointY());
-            else
-                ball.waitToLaunch(RIGHT_PADDLE, rightPaddleX, rightPaddle.getMidPointY());
-
-            leftPaddle.resetSensitivity();
-            rightPaddle.resetSensitivity();
-        }
+        scoreCard.update();
 
         ball.updateWindow();
 

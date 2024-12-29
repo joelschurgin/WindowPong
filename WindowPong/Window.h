@@ -21,16 +21,18 @@ public:
 
 	virtual void update();
 
-	// getters
 	HWND getHWND() { return mHwnd; } // return window object
 	int getXScreenSize() { return wSizeX; }
 	int getYScreenSize() { return wSizeY; }
+
+	void setBackgroundColor(const int r, const int g, const int b);
 
 private:
 	HINSTANCE mHinst;
 
 protected:
 	HWND mHwnd;
+	HBRUSH mBrush;
 
 	float x, y;
 

@@ -1,5 +1,7 @@
 #include "Callback.h"
 
+bool WindowPong::running = false;
+
 // basic callback function
 LRESULT CALLBACK WndProc(
 	_In_ HWND   hWnd,
@@ -10,6 +12,9 @@ LRESULT CALLBACK WndProc(
 {
 	switch (message)
 	{
+	case WM_CLOSE:
+		WindowPong::running = false;
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;

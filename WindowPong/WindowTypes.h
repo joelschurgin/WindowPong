@@ -4,3 +4,4 @@
 #include "StaticWindow.h"
 #include "Ball.h"
 #include "Paddle.h"
+#include "ScoreCard.h"

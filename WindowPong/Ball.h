@@ -5,6 +5,7 @@
 
 #include "Window.h"
 #include "Timer.h"
+#include "ScoreCard.h"
 
 #define M_PI 3.14159265358979323846
 
@@ -16,6 +17,7 @@ public:
 	void updateWindow();
 
 	int isAPointWon();
+	int shouldIncrementScore();
 
 	bool detectCollision(float objX, float objY, float objXSize, float objYSize, bool isLeftPaddle);
 
@@ -32,24 +34,20 @@ public:
 
 	// getters
 	int getSize() { return size; }
-private:
-	// boolean to check if the ball is currently colliding with a paddle
-	bool previouslyCollided = false;
 
-	// this marks the point when a ball is being held by a paddle after a point is scored
+private:
+	bool previouslyCollided = false;
 	bool waitingToLaunch = false;
 
-	// store if a point is won
 	int pointWon = LEFT_POINT; // start with the left paddle
+	bool pointScored = false;
 
-	// initial ball speed
 	float startSpeed = 0.0000005;
-
 	float xSpeed = startSpeed;
 	float ySpeed = startSpeed;
 
 	// multiplier for each paddle hit, so the ball speeds up over time
-	float speedGrowth = 1.1;
+	float speedGrowth = 1.05;
 
 	// use the minimum window width allowed by Windows
 	int size = 1;

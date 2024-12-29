@@ -1,11 +1,23 @@
 #include "Window.h"
 
-Window::Window() : mHwnd(NULL), mHinst(NULL), x(0), y(0), wSizeX(0), wSizeY(0)
+Window::Window() 
+	: mHwnd(NULL)
+	, mHinst(NULL)
+	, x(0)
+	, y(0)
+	, wSizeX(0)
+	, wSizeY(0)
+	, mBrush(NULL)
 {
 	
 }
 
-Window::Window(HINSTANCE hInstance, int nCmdShow, WNDPROC f, TCHAR* szWindowClass) : mHwnd(NULL), mHinst(NULL), x(0), y(0)
+Window::Window(HINSTANCE hInstance, int nCmdShow, WNDPROC f, TCHAR* szWindowClass) 
+	: mHwnd(NULL)
+	, mHinst(NULL)
+	, mBrush(NULL)
+	, x(0)
+	, y(0)
 {
 	init(hInstance, nCmdShow, f, szWindowClass);
 }
@@ -26,12 +38,12 @@ bool Window::init(HINSTANCE hInstance, int nCmdShow, WNDPROC f, TCHAR *szWindowC
 	wcex.cbClsExtra = NULL;
 	wcex.cbWndExtra = NULL;
 	wcex.hInstance = hInstance;
-	wcex.hIcon = NULL;//LoadIcon(hInstance, IDI_APPLICATION);
+	wcex.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = NULL;
 	wcex.lpszClassName = szWindowClass;
-	wcex.hIconSm = NULL;// LoadIcon(wcex.hInstance, IDI_APPLICATION);
+	wcex.hIconSm = LoadIcon(wcex.hInstance, IDI_APPLICATION);
 
 	// register the window object
 	if (!RegisterClassEx(&wcex))
@@ -102,4 +114,10 @@ void Window::moveWindow(float sizeX, float sizeY)
 void Window::update()
 {
 	moveWindow(500, 500);
+}
+
+void Window::setBackgroundColor(const int r, const int g, const int b)
+{
+	mBrush = CreateSolidBrush(RGB(r, g, b));
+	SetClassLongPtr(mHwnd, GCLP_HBRBACKGROUND, (LONG_PTR)mBrush);
 }
